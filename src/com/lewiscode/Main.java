@@ -1,0 +1,71 @@
+package com.lewiscode;
+
+import java.util.Scanner;
+
+public class Main {
+    private final static Scanner scanner = new Scanner(System.in);
+    private final static MobilePhone mobilePhone = new MobilePhone("7053939348");
+    public static void main(String[] args) {
+	// write your code here
+        boolean quit = false;
+        int option;
+        while (!quit){
+            printOptions();
+            System.out.println("Enter your option:");
+            option =scanner.nextInt();
+            scanner.nextLine();
+            switch (option){
+                case 0:
+                    System.out.println("shutting down ...");
+                    quit = true;
+                    break;
+                case 1:
+                    mobilePhone.printContacts();
+                    break;
+                case 2:
+                    addContact();
+                    break;
+                case 3:
+                    updateContact();
+                    break;
+                case 4:
+                    removeContact();
+                    break;
+                case 5:
+                    queryContact();
+                    break;
+            }
+        }
+    }
+    public static void printOptions(){
+        System.out.println("\n Press");
+        System.out.println("\n 0 - To quit the app");
+        System.out.println("\n 1 - To print the list of contacts");
+        System.out.println("\n 2 - TO add an contact to the list");
+        System.out.println("\n 3 - To update an contact in the list");
+        System.out.println("\n 4 - To remove an contact from the list");
+        System.out.println("\n 5 - To search for an contact from the list");
+    }
+    public static void addContact(){
+        System.out.print("Enter the name:");
+        String name =scanner.nextLine();
+        System.out.println("Enter the number");
+        String phoneNumber = scanner.nextLine();
+        Contact contact = new Contact(name,phoneNumber);
+        if (mobilePhone.addContact(contact)){
+            System.out.println("new contact name = " + name + ", phone = " + phoneNumber);
+        }else {
+            System.out.println(name + " doesn't exists");
+        }
+
+    }
+    public static void updateContact(){
+
+    }
+    public static void removeContact(){
+
+    }
+    public static void queryContact(){
+
+    }
+}
