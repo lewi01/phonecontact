@@ -39,12 +39,12 @@ public class Main {
     }
     public static void printOptions(){
         System.out.println("\n Press");
-        System.out.println("\n 0 - To quit the app");
-        System.out.println("\n 1 - To print the list of contacts");
-        System.out.println("\n 2 - TO add an contact to the list");
-        System.out.println("\n 3 - To update an contact in the list");
-        System.out.println("\n 4 - To remove an contact from the list");
-        System.out.println("\n 5 - To search for an contact from the list");
+        System.out.println("0 - To quit the app");
+        System.out.println("1 - To print the list of contacts");
+        System.out.println("2 - TO add an contact to the list");
+        System.out.println("3 - To update an contact in the list");
+        System.out.println("4 - To remove an contact from the list");
+        System.out.println("5 - To search for an contact from the list");
     }
     public static void addContact(){
         System.out.print("Enter the name:");
@@ -55,17 +55,52 @@ public class Main {
         if (mobilePhone.addContact(contact)){
             System.out.println("new contact name = " + name + ", phone = " + phoneNumber);
         }else {
-            System.out.println(name + " doesn't exists");
+            System.out.println(name + "exists");
         }
 
     }
     public static void updateContact(){
-
+        System.out.print("Enter the current name");
+        String name = scanner.nextLine();
+        Contact contact = mobilePhone.queryContact(name);
+        if (contact == null) {
+            System.out.println(name + " not found");
+        }else {
+            System.out.print("Enter new name:");
+            String newName =scanner.nextLine();
+            System.out.print("Enter new number:");
+            String phoneNumber =scanner.nextLine();
+            Contact newContact = Contact.createContact(newName,phoneNumber);
+            if(mobilePhone.updateContact(contact,newContact)){
+                System.out.println(newName + "was updated successfully");
+            }else {
+                System.out.println( newName + "was not updated");
+            }
+        }
     }
     public static void removeContact(){
-
+        System.out.print("Enter the contact name:");
+        String name = scanner.nextLine();
+        Contact contact = mobilePhone.queryContact(name);
+        if(contact ==null){
+            System.out.println(name + " not contact file");
+        }else {
+           if(mobilePhone.removeContact(contact)) {
+               System.out.println(name + " was successfully deleted");
+           }else {
+               System.out.println( "Error deleting " + name );
+           }
+        }
     }
     public static void queryContact(){
-
+        System.out.print("Enter the contact name:");
+        String name = scanner.nextLine();
+        Contact contact = mobilePhone.queryContact(name);
+        if(contact == null){
+            System.out.println( name + "not in file");
+        }else {
+            System.out.println("name = "+ contact.getName() +
+                    ", phone number ="+ contact.getPhoneNumber());
+        }
     }
 }

@@ -11,34 +11,26 @@ public class MobilePhone {
         this.myContacts = new ArrayList<>();
     }
     public  boolean addContact(Contact contact){
-        if (findContact(contact)>=0){
-            System.out.println(contact + "exists");
-            return true;
+        if (findContact(contact.getName())>=0){
+            return false;
         }else {
             myContacts.add(contact);
-            return false;
+            return true;
         }
     }
     public boolean updateContact(Contact oldContact, Contact newContact){
         int position = findContact(oldContact);
         if (position < 0) {
-            System.out.println(oldContact + " doesn't exists");
             return false;
-
-        }else if (findContact(oldContact.getName())!=-1){
-            System.out.println("contact with the "+newContact.getName()+" already exists. update was not successful");
         }else
             myContacts.set(position, newContact);
-            System.out.println(oldContact + " was updated to " + newContact + "successfully");
             return true;
     }
     public boolean removeContact(Contact contact){
         if (findContact(contact)>=0){
             myContacts.remove(contact);
-            System.out.println(contact + " was successfully removed");
             return  true;
         }else {
-            System.out.println(contact + " doesn't exists");
             return false;
         }
     }
